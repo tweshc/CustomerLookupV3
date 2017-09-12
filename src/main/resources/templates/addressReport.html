@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Address Report</title>
+<style>
+table{
+	width:500px;
+	max-height:50%;
+	overflow-y:scroll;
+	border:10px solid #bde7e9;
+	background-color: #58d2d1;
+	text-align: center;
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translateX(-50%)translateY(-50%);
+	box-shadow:3px 3px 15px gray;
+}
+table tr{
+	height:50px;
+}
+</style>
+</head>
+<body>
+<h3>Query Results</h3>
+	<table>
+		<tr>
+			<th>Customer ID</th>
+			<th>House Number</th>
+			<th>Roadway</th>
+			<th></th>
+			<th>City</th>
+			<th>State</th>
+			<th>Country</th>
+		</tr>
+       <tr th:each="address : ${address}">
+        <td th:text="${address.id}"></td>
+        <td th:text="${address.BuildingNum}"></td>
+        <td th:text="${address.RoadwayName}"></td>
+        <td th:text="${address.RoadwayType}"></td>
+        <td th:text="${address.City}"></td>
+        <td th:text="${address.State}"></td>
+        <td th:text="${address.Country}"></td>
+    </tr>
+
+	</table>
+	
+
+</body>
+</html>
