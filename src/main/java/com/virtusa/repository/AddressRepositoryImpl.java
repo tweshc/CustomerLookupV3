@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mysql.fabric.xmlrpc.base.Array;
 import com.thoughtworks.xstream.converters.reflection.ObjectAccessException;
@@ -21,51 +22,34 @@ public class AddressRepositoryImpl implements AddressRepository {
   
   @Autowired
   private JdbcTemplate jdbcTemplate;
-  
-  private static class EmployeeRowMapper implements RowMapper<Address> {
-
-    public Address mapRow(ResultSet resultSet, int i) throws SQLException {
-        Address address = new Address();
-        address.setCustomerId(resultSet.getInt("id"));
-        address.setCity(resultSet.getString("City"));
-        address.setBuildingNumber(resultSet.getInt("BuildingNum"));
-        address.setCountry(resultSet.getString("Country"));
-        address.setState(resultSet.getString("State"));
-        address.setRoadwayType(resultSet.getString("RoadwayType"));
-        address.setRoadwayName(resultSet.getString("RoadwayName"));
-        return address;
-    }
-}
-
 
   @Override
-  public List retreive(int customerId) {
-    List<Address> list= new ArrayList<>();
-   String sql = "Select * from results where id = ?";
+  public List retreiveById(int customerId) {
+    String sql = "Select * from results where id = ?";
     return this.jdbcTemplate.queryForList(sql,new Object[] {customerId});
-    /*List<Map<String, Object>> coll = this.jdbcTemplate.queryForList("SELECT City,BuildingNum,Country,State,RoadwayType,RoadwayName,Unit from results where id = ?", 
-        new Object[] {customerId});*/
+  }
+
+  @Override
+  public List retreiveByStr(String CityCountryOrState, String ColumnName) {
+    String sql = "Select * from results where " + ColumnName +" = ?";
+    return this.jdbcTemplate.queryForList(sql, new Object[] {CityCountryOrState});
+  }
+  
+  public int generateId() {
+    return jdbcTemplate.queryForObject("select count(*) from results",
+        Integer.class) + 1000;
+  }
+
+  @Transactional
+  @Override
+  public void insert(Address address) {
     
-/*   Collection col = this.jdbcTemplate.queryForList("SELECT City,BuildingNum,Country,State,RoadwayType,RoadwayName,Unit from results where id = ?", 
-        new Object[] {customerId});*/
-  //  List<Address> addressList = jdbcTemplate.query("SELECT City,BuildingNum,Country,State,RoadwayType,RoadwayName,Unit from results where id = ?", new Object[] {customerId}, new EmployeeRowMapper());
-    /*Address address = jdbcTemplate.queryForObject("SELECT City,BuildingNum,Country,State,RoadwayType,RoadwayName,Unit from results where id = ?", new Object[] {1001}, new EmployeeRowMapper());
-   jdbcTemplate.queryforob
-    */
-    /*    System.out.println(col.getClass());
-    System.out.println(col.getClass().getClass());*/
-    //System.out.println(" address list "+address);
-   // System.out.println(coll);
-     //list = jdbcTemplate.query("SELECT City,BuildingNum,Country,State,RoadwayType,RoadwayName,Unit from results where id = ?", new Object[] {customerId}, new EmployeeRowMapper());
-    //System.out.println(coll.get(0).get(customerId).getClass());
-    
-   // return (Address) coll.get(0).get(customerId);
-     //jdbcTemplate.queryfor
-     
-     //return list.get(0);
-     /* this.jdbcTemplate.queryForList
-        ("SELECT City,BuildingNum,Country,State,RoadwayType,RoadwayName,Unit from results where id = ?", 
-            new Object[] {customerId});*/
+    String sql = "INSERT INTO results (id, BuildingNum, City, Country, RoadwayName, RoadwayType, State, Unit) "
+        + "VALUES ('"+generateId()+"', '"+address.getBuildingNumber()+"', '"+address.getCity()+"', "
+            + "'"+address.getCountry()+"', '"+address.getRoadwayName()+"', '"+address.getRoadwayType()+"', "
+                + "'"+address.getState()+"', '"+address.getUnit()+"')";
+    this.jdbcTemplate.update(sql);
+    System.out.println("SUCCESS ON INSERT, CHECK TABLE");
   }
 
 }

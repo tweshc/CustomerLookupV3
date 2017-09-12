@@ -2,6 +2,7 @@ package com.virtusa.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,6 +18,7 @@ public class Address {
   public Address() {  }
   
   @Id
+  @GeneratedValue
   @Column(name="id")
   private int customerId; //customer id
   
@@ -42,6 +44,7 @@ public class Address {
     this.id = id;
   }*/
   //@Range(min = 1001, max = 9999)
+
   public int getCustomerId() {
     return customerId;
   }
@@ -89,5 +92,11 @@ public class Address {
   }
   public void setCountry(String country) {
     this.country = country;
+  }
+  @Override
+  public String toString() {
+    return "Address [customerId=" + customerId + ", buildingNumber=" + buildingNumber + ", roadwayName=" + roadwayName
+        + ", roadwayType=" + roadwayType + ", unit=" + unit + ", city=" + city + ", state=" + state + ", country="
+        + country + "]";
   }
 }

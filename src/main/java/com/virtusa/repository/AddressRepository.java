@@ -5,5 +5,8 @@ import java.util.List;
 import com.virtusa.model.Address;
 
 public interface AddressRepository {
-  List retreive(int customerId);
+  List retreiveById(int customerId);
+  List retreiveByStr(String CityCountryOrState, String ColumnName);
+  void insert(Address address);
 }
+

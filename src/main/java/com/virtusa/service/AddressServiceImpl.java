@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.virtusa.model.Address;
 import com.virtusa.repository.AddressRepository;
@@ -17,10 +16,23 @@ public class AddressServiceImpl implements AddressService {
   @Autowired
   private AddressRepository addressRepository;
 
-  @Transactional
-  public List<Address> retreive(int customerId) {
-    List<Address> address = addressRepository.retreive(customerId); 
+  @Override
+  public List<Address> retreiveById(int customerInt) {
+    @SuppressWarnings("unchecked")
+    List<Address> address = addressRepository.retreiveById(customerInt); 
     return address;
+  }
+
+  @Override
+  public List retreiveByStr(String CityStateOrCountry, String ColumnName) {
+    @SuppressWarnings("unchecked")
+    List<Address> address = addressRepository.retreiveByStr(CityStateOrCountry, ColumnName); 
+    return address;
+  }
+
+  @Override
+  public void insert(Address address) {
+    addressRepository.insert(address);
   }
 
 }

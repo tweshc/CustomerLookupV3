@@ -1,5 +1,10 @@
 @charset "ISO-8859-1";
 
+body{
+	font-family:'Roboto', sans-serif;
+	padding-top: 60px;
+}
+
 #enterCustomerId-main-content {
 	width: 400px;
 	height: 300px;
