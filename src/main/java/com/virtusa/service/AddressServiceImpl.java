@@ -15,7 +15,9 @@ public class AddressServiceImpl implements AddressService {
   
   @Autowired
   private AddressRepository addressRepository;
-
+  
+  @Autowired AutoGenerateService autoGenerateService;
+   
   @Override
   public List<Address> retreiveById(int customerInt) {
     @SuppressWarnings("unchecked")
@@ -35,4 +37,10 @@ public class AddressServiceImpl implements AddressService {
     addressRepository.insert(address);
   }
 
+  @Override
+  public void autoGenerate(int numberOfEntries) {
+    autoGenerateService.autoGenerate(numberOfEntries);
+  }
+
+  
 }

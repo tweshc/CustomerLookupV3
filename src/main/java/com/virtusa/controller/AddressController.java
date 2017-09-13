@@ -31,7 +31,7 @@ public class AddressController {
     Address address = new Address();
     address.setCustomerId(5000);
     model.addAttribute("address", address);
-    System.out.println("customerId: " + address.getCustomerId());
+    //System.out.println("customerId: " + address.getCustomerId());
     
     return "enterCustomerId";
   }
@@ -59,7 +59,7 @@ public class AddressController {
   
   @RequestMapping(value="/enterCustomerCity", method=RequestMethod.POST)
   public String enterCustomerCityForm(Model model, @RequestParam String customerCity) {
-    System.out.println(customerCity + " was entered");
+    //System.out.println(customerCity + " was entered");
     @SuppressWarnings("unchecked")
     List<Address> resultAddresses = addressService.retreiveByStr(customerCity, "City");
     System.out.println(resultAddresses);
@@ -69,7 +69,7 @@ public class AddressController {
   
   @RequestMapping(value="/enterCustomerState", method=RequestMethod.GET)
   public String enterCustomerState(Model model) {
-    System.out.println("enterCustomerState method is working".toUpperCase());
+    //System.out.println("enterCustomerState method is working".toUpperCase());
     Address address = new Address();
     model.addAttribute("address", address);
     return "enterCustomerState";
@@ -77,7 +77,7 @@ public class AddressController {
   
   @RequestMapping(value="/enterCustomerState", method=RequestMethod.POST)
   public String enterCustomerStateForm(Model model, @RequestParam String customerState) {
-    System.out.println(customerState + " was entered");
+    //System.out.println(customerState + " was entered");
     @SuppressWarnings("unchecked")
     List<Address> resultAddresses = addressService.retreiveByStr(customerState, "State");
     System.out.println(resultAddresses);
@@ -87,7 +87,7 @@ public class AddressController {
   
   @RequestMapping(value="/enterCustomerCountry", method=RequestMethod.GET)
   public String enterCustomerCountry(Model model) {
-    System.out.println("enterCustomerCountry method is working".toUpperCase());
+    //System.out.println("enterCustomerCountry method is working".toUpperCase());
     Address address = new Address();
     model.addAttribute("address", address);
     return "enterCustomerCountry";
@@ -105,7 +105,7 @@ public class AddressController {
   
   @RequestMapping(value="/insertNewCustomer", method=RequestMethod.GET)
   public String insertNewCustomer(Model model) {
-    System.out.println("insertNewCustomer method is working".toUpperCase());
+    //System.out.println("insertNewCustomer method is working".toUpperCase());
     Address address = new Address();
     model.addAttribute("address", address);
     return "insertNewCustomer";
@@ -127,5 +127,16 @@ public class AddressController {
       address.setUnit(u);
       addressService.insert(address);
       return "index";
+  }
+  
+  @RequestMapping("/autoGenerate")
+  public String autoGenerate(Model model) {
+    return "autoGenerate";
+  }
+  
+  @RequestMapping(value="/autoGenerate", method=RequestMethod.POST)
+  public String autoGenerateForm(Model model, @RequestParam String numberOfNewEntries) {
+    addressService.autoGenerate(Integer.parseInt(numberOfNewEntries));
+    return "index";
   }
 }

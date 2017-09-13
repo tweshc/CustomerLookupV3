@@ -9,5 +9,6 @@ public interface AddressService {
   List retreiveById(int customerId);
   List retreiveByStr(String CityStateOrCountry, String ColumnName);
   void insert(Address address);
+  void autoGenerate(int numberOfEntries);
   
 }

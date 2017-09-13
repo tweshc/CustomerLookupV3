@@ -8,5 +8,6 @@ public interface AddressRepository {
   List retreiveById(int customerId);
   List retreiveByStr(String CityCountryOrState, String ColumnName);
   void insert(Address address);
+  List retreiveAllRoadwayNames();
 }
 

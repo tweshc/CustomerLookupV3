@@ -37,7 +37,7 @@ public class AddressRepositoryImpl implements AddressRepository {
   
   public int generateId() {
     return jdbcTemplate.queryForObject("select count(*) from results",
-        Integer.class) + 1000;
+        Integer.class) + 1001;
   }
 
   @Transactional
@@ -49,7 +49,13 @@ public class AddressRepositoryImpl implements AddressRepository {
             + "'"+address.getCountry()+"', '"+address.getRoadwayName()+"', '"+address.getRoadwayType()+"', "
                 + "'"+address.getState()+"', '"+address.getUnit()+"')";
     this.jdbcTemplate.update(sql);
-    System.out.println("SUCCESS ON INSERT, CHECK TABLE");
+    //System.out.println("SUCCESS ON INSERT, CHECK TABLE");
+  }
+
+  @Override
+  public List retreiveAllRoadwayNames() {
+    String sql = "Select RoadwayName from results";
+    return this.jdbcTemplate.queryForList(sql, String.class);
   }
 
 }
