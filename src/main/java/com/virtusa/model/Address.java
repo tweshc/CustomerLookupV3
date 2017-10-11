@@ -6,14 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+import io.searchbox.annotations.JestId;
+
 @Entity
 @Table(name="results")
+@Component
 public class Address {
-  
-/*  @Id
-  @GeneratedValue
-  @Column(name="GOAL_ID")
-  private Long id;*/
 
   public Address() {  }
   
@@ -21,6 +21,9 @@ public class Address {
   @GeneratedValue
   @Column(name="id")
   private int customerId; //customer id
+  
+  @JestId
+  public String jestId;
   
   @Column(name="BuildingNum")
   private int buildingNumber;
@@ -36,14 +39,6 @@ public class Address {
   private String state;
   @Column(name="Country")
   private String country;
-  
-/*  public Long getId() {
-    return id;
-  }
-  public void setId(Long id) {
-    this.id = id;
-  }*/
-  //@Range(min = 1001, max = 9999)
 
   public int getCustomerId() {
     return customerId;
@@ -98,5 +93,12 @@ public class Address {
     return "Address [customerId=" + customerId + ", buildingNumber=" + buildingNumber + ", roadwayName=" + roadwayName
         + ", roadwayType=" + roadwayType + ", unit=" + unit + ", city=" + city + ", state=" + state + ", country="
         + country + "]";
+  }
+  public void setJestId(String jestId) {
+    this.jestId = jestId;
+  }
+  
+  public String getJestId() {
+    return this.jestId;
   }
 }

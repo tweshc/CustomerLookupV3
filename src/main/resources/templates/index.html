@@ -4,15 +4,21 @@
 <meta charset="ISO-8859-1"/>
 <title>Customer Lookup Application</title>
 
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="assets/css/index-styles.css" rel="stylesheet"/> 
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/assets/css/index-styles.css" rel="stylesheet"/> 
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
 </head>
 <body>
-	<h2>Index page</h2>
+
+	<div class="container">
+	<h2>Using MySql</h2>
+	<a href="ElasticSearch/elasticSearchMenu.html" class="btn btn-md btn-danger">
+	Use Elastic Search Engine</a>
+	</div>
+
 
 	<section class="container">
-		<article id="index-main-content">
+		<article id="index-main-content" style="max-height:560px!important;">
 			<h3>Select how to search customers by</h3>
 			<hr/>
 			<a href="enterCustomerId.html" class="btn btn-md btn-warning">Search By Id</a>
@@ -23,8 +29,10 @@
 			<h3>Other Options</h3>
 			<hr/>
 			<a href="insertNewCustomer.html" class="btn btn-md btn-warning">Insert Customer</a>
+			<a href="updateCustomer.html" class="btn btn-md btn-warning">Update Customer Information</a>
+			<a href="deleteCustomer.html" class="btn btn-md btn-warning">Delete Customer</a>
 			<a href="autoGenerate.html" class="btn btn-md btn-warning">Auto Populate Table</a>
-			<a href="" class="btn btn-md btn-warning">View List of All Customers</a>
+			<a href="getAllRecords.html" class="btn btn-md btn-warning">View List of All Customers</a>
 		</article>
 	</section>
 	 

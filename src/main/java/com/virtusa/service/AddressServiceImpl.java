@@ -8,6 +8,12 @@ import org.springframework.stereotype.Service;
 import com.virtusa.model.Address;
 import com.virtusa.repository.AddressRepository;
 
+/**
+ * This class delegates all necessary information to Repository tier. For Bulk creations
+ * of randomly generated addresses, work gets delegated to AutoGenerateService.
+ * @author tchowdhury
+ *
+ */
 @Service
 public class AddressServiceImpl implements AddressService {
   
@@ -40,6 +46,24 @@ public class AddressServiceImpl implements AddressService {
   @Override
   public void autoGenerate(int numberOfEntries) {
     autoGenerateService.autoGenerate(numberOfEntries);
+  }
+
+  @Override
+  public List<Address> getAll() {
+    List<Address> result = addressRepository.getAll();
+    return result;
+  }
+
+  @Override
+  public void update(Address address) {
+    addressRepository.update(address);
+    
+  }
+
+  @Override
+  public void delete(String cid) {
+    int customerId = Integer.parseInt(cid);
+    addressRepository.delete(customerId);
   }
 
   

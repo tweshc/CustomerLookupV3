@@ -6,7 +6,7 @@ body{
 
 #index-main-content {
 	width: 500px;
-	height: 500px;
+	max-height: 560px;
 	border: 10px solid #bde7e9;
 	background-color: #58d2d1;
 	text-align: center;

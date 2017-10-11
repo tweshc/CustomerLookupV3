@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Customer Lookup Application</title>
+<link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/assets/css/enterCustomerId-styles.css" rel="stylesheet"/> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    <style>
+    #enterCustomerId-main-content{
+    	height:600px !important;
+    }
+    .btn{
+    	display:block;
+    	margin-bottom:10px;
+    	width:50%;
+    }
+    </style>
+</head>
+<body>
+<div class="container" style="margin-top:-40px;">
+	<h2>Using Elastic Search Engine</h2>
+	<a href="../" style="width:100px" class="btn btn-md btn-danger">
+	Use MySql</a>
+</div>
+<section class="container">
+		<article id="enterCustomerId-main-content" >
+
+			<h4>Index new Address</h4>
+			<hr />
+			<br />
+
+			<form method="post">
+				<input placeholder="Building Number" name ="bn" style="margin: 10px auto; width: 40%;" /> 
+				<input placeholder="City" name ="ci" style="margin: 10px auto; width: 40%;" />
+				<input placeholder="Country" name ="co" style="margin: 10px auto; width: 40%;" />
+				<input placeholder="Roadway Name" name ="rwn" style="margin: 10px auto; width: 40%;" />
+				<input placeholder="Roadway Type" name ="rwt" style="margin: 10px auto; width: 40%;" />
+				<input placeholder="State" name ="s" style="margin: 10px auto; width: 40%;" />
+				<input placeholder="Unit" name ="u" style="margin: 10px auto; width: 40%;" />
+				<input class="btn btn-md btn-warning" style="margin:0 auto;" type="submit" value="Insert" />
+			</form>
+			
+			<h4>Other Options</h4>
+			<hr />
+			<a class="btn btn-md btn-warning" style="margin:15px auto;" href="BulkIndex.html">Go To Bulk Index Page</a>
+			<a class="btn btn-md btn-warning" style="margin:15px auto;" href="Search.html">Go To Search Page</a>
+			<br />
+
+		</article>
+	</section>
+</body>
+</html>

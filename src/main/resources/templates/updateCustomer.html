@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Customer Lookup Application</title>
+
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/assets/css/index-styles.css" rel="stylesheet"/> 
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+	<style>
+		input{
+			display:block;
+		}
+		.btn{
+			position:relative;
+			left:50%;
+			transform:translateX(-50%);
+		}
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<a href="/" class="btn btn-md btn-danger">Go Home</a>
+</div>
+
+
+	<section class="container">
+		<article id="insertNewCustomer-main-content">
+
+			<h4>Update Customer Information</h4>
+			<hr />
+			<h5>Select which Customer by entering Customer ID</h5>
+			<br />
+
+			<form method="post">
+				<input placeholder="Customer ID" name ="cid" style="margin: 10px auto; width: 40%;" /> <hr/>
+				<input placeholder="Building Number" name ="bn" style="margin: 10px auto; width: 40%;" /> 
+				<input placeholder="City" name ="ci" style="margin: 10px auto; width: 40%;" />
+				<input placeholder="Country" name ="co" style="margin: 10px auto; width: 40%;" />
+				<input placeholder="Roadway Name" name ="rwn" style="margin: 10px auto; width: 40%;" />
+				<input placeholder="Roadway Type" name ="rwt" style="margin: 10px auto; width: 40%;" />
+				<input placeholder="State" name ="s" style="margin: 10px auto; width: 40%;" />
+				<input placeholder="Unit" name ="u" style="margin: 10px auto; width: 40%;" />
+				
+				<input class="btn btn-md btn-warning" type="submit" value="Update" />
+			</form>
+
+		</article>
+	</section>
+	 
+</body>
+</html>

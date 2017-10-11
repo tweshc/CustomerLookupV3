@@ -9,5 +9,8 @@ public interface AddressRepository {
   List retreiveByStr(String CityCountryOrState, String ColumnName);
   void insert(Address address);
   List retreiveAllRoadwayNames();
+  List<Address> getAll();
+  void update(Address address);
+  void delete(int customerId);
 }
 

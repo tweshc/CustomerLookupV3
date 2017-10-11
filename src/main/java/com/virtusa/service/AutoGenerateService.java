@@ -1,5 +1,6 @@
 package com.virtusa.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,7 +9,15 @@ import org.springframework.stereotype.Service;
 
 import com.virtusa.model.Address;
 import com.virtusa.repository.AddressRepository;
+import com.virtusa.repository.ElasticSearchRepository;
 
+/**
+ * This class contains methods that auto generate a number of Address objects for MySql insertion
+ * or Elastic Search Indexing. It contains 9 arrays of hard coded names of Countries, States and Cities
+ * It then chooses randomly a City that is in a corresponding State, which is also in a corresponding Country
+ * @author tchowdhury
+ *
+ */
 @Service
 public class AutoGenerateService {
   
@@ -16,6 +25,9 @@ public class AutoGenerateService {
   
   @Autowired
   private AddressRepository addressRepository;
+  
+  @Autowired
+  private ElasticSearchRepository elasticSearchRepository;
   
   //data for auto-generate
   List<String> countries = Arrays.asList("USA","India");
@@ -34,6 +46,11 @@ public class AutoGenerateService {
     
    String unit = "abcdefghijklmn";
    
+   /**
+    * This method calls on other methods in the class to each come up with a random value for each
+    * property of Address object.
+    * @param numberOfEntries
+    */
    public void autoGenerate(int numberOfEntries) {
      
      for(int i = 0; i<numberOfEntries; i++) {
@@ -51,16 +68,30 @@ public class AutoGenerateService {
        autoAddress.setUnit(autoGenUnit());
        
        addressRepository.insert(autoAddress);
-       System.out.println("===========================");
-       System.out.println(autoAddress.getBuildingNumber());
-       System.out.println(autoAddress.getCountry());
-       System.out.println(autoAddress.getState());
-       System.out.println(autoAddress.getCity());
-       System.out.println(autoAddress.getRoadwayName());
-       System.out.println(autoAddress.getRoadwayType());
-       System.out.println(autoAddress.getUnit());
-       System.out.println("===========================");
      }
+   }
+   
+public List<Address> autoGenerateBulkIndex(int numberOfEntries) {
+  
+  List<Address> bulkAddresses = new ArrayList<Address>();
+  
+     for(int i = 0; i<numberOfEntries; i++) {
+       String autoCountry = autoGenCountry();
+       String state = autoGenState(autoCountry);
+       String city = autoGenCity(state);
+       
+       Address autoAddress = new Address();
+       autoAddress.setBuildingNumber(autoGenBuildingNum());
+       autoAddress.setCountry(autoCountry);
+       autoAddress.setState(state);
+       autoAddress.setCity(city);
+       autoAddress.setRoadwayName(autoGenRoadwayName());
+       autoAddress.setRoadwayType(autoGenRoadwayType());
+       autoAddress.setUnit(autoGenUnit());
+       
+       bulkAddresses.add(autoAddress);
+     }
+     return bulkAddresses;
    }
    
    private int autoGenBuildingNum() {
@@ -97,8 +128,9 @@ public class AutoGenerateService {
    }
    
    private String autoGenRoadwayName() {
-     List<String> roadwaysFromDB = addressRepository.retreiveAllRoadwayNames();
-     return roadwaysFromDB.get(randomWithRange(0,roadwaysFromDB.size()-1));
+     List<String> randomRoadways = Arrays.asList("Blossom","Railway","Duke","Orchid","Union", "Brook"
+         ,"West", "East","Oceinview","Estate", "Vista","Nova","Ivy","Dew","Pebble","College","Sapphire","Green");
+     return randomRoadways.get(randomWithRange(0,randomRoadways.size()-1));
    }
    
    private String autoGenRoadwayType() {

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Customer Lookup Application</title>
+
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/assets/css/index-styles.css" rel="stylesheet"/> 
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+	<style>
+		input{
+			display:block;
+		}
+		.btn{
+			position:relative;
+			left:50%;
+			transform:translateX(-50%);
+		}
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<a href="/" class="btn btn-md btn-danger">Go Home</a>
+</div>
+
+
+	<section class="container">
+		<article id="insertNewCustomer-main-content">
+
+			<h4>Delete Customer</h4>
+			<hr />
+			<h5>Enter Customer ID</h5>
+			<br />
+
+			<form method="post">
+				<input placeholder="Customer ID" name ="cid" style="margin: 10px auto; width: 40%;" /> <hr/>
+
+				
+				<input class="btn btn-md btn-warning" type="submit" value="Delete" />
+			</form>
+
+		</article>
+	</section>
+	 
+</body>
+</html>
